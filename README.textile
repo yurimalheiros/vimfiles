@@ -10,8 +10,6 @@ git clone git://github.com/yurimalheiros/vimfiles.git ~/.vim
 
 Copy or symlink the .vim/vimrc file as .vimrc.
 
-To create a symlink use:
-
 <pre><code>
 ln -s ~/.vim/vimrc ~/.vimrc
 </code></pre>
