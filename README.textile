@@ -1,0 +1,18 @@
+h1. Install
+
+First of all backup your current .vim or vimfiles folder and your .vimrc. If you have any trouble you will be able to get back to your past configurations.
+
+Clone this repo into your home directory:
+
+<pre><code>
+git clone git://github.com/yurimalheiros/vimfiles.git ~/.vim
+</code></pre>
+
+Copy or symlink the .vim/vimrc file as .vimrc.
+
+To create a symlink use:
+
+<pre><code>
+ln -s ~/.vim/vimrc ~/.vimrc
+</code></pre>
+
