@@ -5,6 +5,7 @@ call pathogen#runtime_append_all_bundles()
 "general
 set undolevels=1000
 set wildchar=<Tab> wildmenu wildmode=full
+let mapleader=","
 
 "visual
 set lines=31 columns=95
@@ -19,6 +20,7 @@ set guioptions-=m   "hide menubar
 "search
 set incsearch       "incremental search
 set hlsearch        "highlight searches
+set smartcase
 set sm
 
 "indent
@@ -47,11 +49,11 @@ nmap <silent> <Down> gj
 nmap <silent> <Up> gk
 set fo=l
 
-"ctrl+s to save
-nnoremap <C-s> :w<CR>
+",w to save
+nnoremap <leader>w :w<CR>
 
-"ctrl+c in visual mode to copy to clipboard
-vnoremap <C-Insert> "+y
+",c in visual mode to copy to clipboard
+vnoremap <leader>c "+y
 
 "smart home/end
 " map <Home> to move to first word in line
@@ -77,10 +79,16 @@ function! SmartHome(mode)
 endfun
 
 " CommandT
-nnoremap <C-t> :<C-u>CommandT<CR>
+nnoremap <leader>t :<C-u>CommandT<CR>
 
 " BufExplorer
-nnoremap <C-b> :<C-u>BufExplorer<Cr>
+nnoremap <leader>b :<C-u>BufExplorer<Cr>
 
 " Ack
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+
+" Write mode
+nnoremap <F12> :set nonumber<Cr>:set spell spelllang=pt<Cr>:set guioptions-=r<Cr>
+
+" Development mode
+nnoremap <F11> :set number<Cr>:set nospell<Cr>:set guioptions+=r<CR>
