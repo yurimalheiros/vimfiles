@@ -20,6 +20,7 @@ set guioptions-=m   "hide menubar
 "search
 set incsearch       "incremental search
 set hlsearch        "highlight searches
+set ignorecase
 set smartcase
 set sm
 
