@@ -8,9 +8,7 @@ Clone this repo into your home directory:
 git clone git://github.com/yurimalheiros/vimfiles.git ~/.vim
 ```
 
-```
-Copy or symlink the .vim/vimrc file as .vimrc.
-```
+Copy or symlink the .vim/vimrc file as .vimrc:
 
 ```
 ln -s ~/.vim/vimrc ~/.vimrc
