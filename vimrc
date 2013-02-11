@@ -1,95 +1,93 @@
-"pathogen
+" Vundle
+set nocompatible
 filetype off
-call pathogen#runtime_append_all_bundles()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-"general
+" Bundles (Vundle)
+Bundle 'gmarik/vundle'
+Bundle 'vim-scripts/tComment'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'mileszs/ack.vim'
+Bundle 'Townk/vim-autoclose'
+Bundle 'kien/ctrlp.vim'
+Bundle 'tpope/vim-surround'
+Bundle 'sukima/xmledit'
+Bundle 'vim-scripts/UltiSnips'
+
+filetype plugin indent on
+
+" General
 set undolevels=1000
+set undodir=~/.vim/undodir
+set undofile
 set wildchar=<Tab> wildmenu wildmode=full
 let mapleader=","
 
-"visual
-set lines=31 columns=95
-colorscheme molokai
+" Visual
+set guifont=Anonymous\ Pro:h14
 syntax on
+colorscheme codeschool
 set number          "show line numbers
 set showmode        "show current mode
 set linespace=3    
 set guioptions-=T   "hide toolbar
 set guioptions-=m   "hide menubar
+set guioptions-=r   "hide scrollbar
+set guioptions-=L   "hide left scrollbar
+set ruler
+set cursorline
 
-"search
+" Search
 set incsearch       "incremental search
 set hlsearch        "highlight searches
 set ignorecase
 set smartcase
 set sm
 
-"indent
+" Indent
 set shiftwidth=4
 set softtabstop=4
 set expandtab
 set autoindent
 
-"filetypes
+" Filetypes
 autocmd Filetype html setlocal tabstop=2
-autocmd FileType python set ft=python.django    "for SnipMate
-autocmd FileType html set ft=htmldjango.html    "for SnipMate
 
-"fold
+" Fold
 set foldmethod=indent   "fold based on indent
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 
-"load ftplugins and indent files
+" Load ftplugins and indent files
 filetype on
 filetype plugin on
 filetype indent on
 
-"try to make possible to navigate within lines of wrapped lines
+" Try to make possible to navigate within lines of wrapped lines
 nmap <silent> <Down> gj
 nmap <silent> <Up> gk
 set fo=l
 
-",w to save
-nnoremap <leader>w :w<CR>
+" CtrlP
+nnoremap <leader>t :CtrlP .<Cr>
+nnoremap <leader>v :CtrlPBuffer<Cr>
+nnoremap <leader>r :CtrlPClearAllCaches<Cr>
+set wildignore+=*.pyc,*.swp
 
-",c in visual mode to copy to clipboard
-vnoremap <leader>c "+y
-
-"smart home/end
-" map <Home> to move to first word in line
-" if at first word, move to beginning of line
-nnoremap <silent> <Home> :call SmartHome("n")<CR>
-inoremap <silent> <Home> <C-O>:call SmartHome("i")<CR>
-vnoremap <silent> <Home> <Esc>:call SmartHome("v")<CR>
-function! SmartHome(mode)
-  if col('.') == 1
-    if line('.') == 1
-      return
-    else
-      normal! ^
-    endif
-  elseif strpart(getline('.'), -1, col('.')) =~ '^\s\+$'
-    normal! 0
-  else
-    normal! ^
-  endif
-  if a:mode == "v"
-    normal! msgv`s
-  endif
-endfun
-
-" CommandT
-nnoremap <leader>t :<C-u>CommandT<CR>
-
-" BufExplorer
-nnoremap <leader>b :<C-u>BufExplorer<Cr>
+" UltiSnips
+let g:UltiSnipsExpandTrigger ='<tab>'
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+autocmd FileType python set ft=python.django
+autocmd FileType html set ft=htmldjango.html
 
 " Ack
-let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+let g:ackprg="ack -H --nocolor --nogroup --column"
 
-" Write mode
-nnoremap <F12> :set nonumber<Cr>:set spell spelllang=pt<Cr>:set guioptions-=r<Cr>
+" Spell
+nnoremap <F2> :setlocal spell! spelllang=pt<CR>
 
-" Development mode
-nnoremap <F11> :set number<Cr>:set nospell<Cr>:set guioptions+=r<CR>
+" Marked
+command! Marked :silent !open -a Marked.app '%:p'
