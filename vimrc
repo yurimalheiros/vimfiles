@@ -14,7 +14,21 @@ Bundle 'Townk/vim-autoclose'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'sukima/xmledit'
-Bundle 'vim-scripts/UltiSnips'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'tpope/vim-markdown'
+Bundle 'w0ng/vim-hybrid'
+Bundle 'terryma/vim-expand-region'
+Bundle 'chriskempson/base16-vim'
+
+" snipmate
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "honza/vim-snippets"
+Bundle "garbas/vim-snipmate"
+
+" fix python path
+let $PATH .= ':/usr/local/share/python'
 
 filetype plugin indent on
 
@@ -26,9 +40,10 @@ set wildchar=<Tab> wildmenu wildmode=full
 let mapleader=","
 
 " Visual
-set guifont=Anonymous\ Pro:h14
+set guifont=Meslo\ LG\ L\ for\ Powerline:h12
 syntax on
-colorscheme codeschool
+colorscheme base16-eighties
+set background=dark
 set number          "show line numbers
 set showmode        "show current mode
 set linespace=3    
@@ -76,18 +91,43 @@ nnoremap <leader>v :CtrlPBuffer<Cr>
 nnoremap <leader>r :CtrlPClearAllCaches<Cr>
 set wildignore+=*.pyc,*.swp
 
+let g:ctrlp_use_caching = 0
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+    \ }
+endif
+
 " UltiSnips
 let g:UltiSnipsExpandTrigger ='<tab>'
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-autocmd FileType python set ft=python.django
+" autocmd FileType python set ft=python.django
+" autocmd FileType python set ft=python
 autocmd FileType html set ft=htmldjango.html
+set runtimepath+=~/.vim/bundle/vim-snippets
+
+" Indent guides
+let g:indent_guides_guide_size = 1
 
 " Ack
-let g:ackprg="ack -H --nocolor --nogroup --column"
+let g:ackprg = "ag --nogroup --nocolor --column"
 
 " Spell
 nnoremap <F2> :setlocal spell! spelllang=pt<CR>
 
-" Marked
-command! Marked :silent !open -a Marked.app '%:p'
+" Markdown
+au BufRead,BufNewFile *.md set filetype=markdown
+
+" Syntastic
+let g:syntastic_python_checkers = ['flake8']
+
+" Expand region
+map K <Plug>(expand_region_expand)
+map J <Plug>(expand_region_shrink)
+

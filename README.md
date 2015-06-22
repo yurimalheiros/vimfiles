@@ -1,6 +1,6 @@
 # Install
 
-First of all backup your current .vim or vimfiles folder and your .vimrc. If you have any trouble you will be able to get back to your past configurations.
+First of all backup your current .vim or vimfiles folder and your .vimrc. If you have any trouble you will be able to get back to your past configuration.
 
 Clone this repo into your home directory:
 
